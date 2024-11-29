@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Tasks</h1>
+    <form method="POST" action="{{ url_for('tasks') }}">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=32) }}
+        </p>
+        <p>
+            {{ form.description.label }}<br>
+            {{ form.description(rows=4, cols=50) }}
+        </p>
+        <p>
+            {{ form.due_date.label }}<br>
+            {{ form.due_date() }}
+        </p>
+        <p>
+            {{ form.completed.label }} {{ form.completed() }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <ul id="task-list">
+        {% for task in tasks %}
+            <li>{{ task.title }} - {{ task.due_date }}</li>
+        {% endfor %}
+    </ul>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
